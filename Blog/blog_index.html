@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2023-04-06 Thu 13:53 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="author" content="Amery Gration" />
+<meta name="generator" content="Org Mode" />
+<head>
+  <meta charset="UTF-8" />
+  <title>Amery Gration</title>
+  <link rel="stylesheet" href="../Css/style.css" />
+  <link rel="stylesheet" href="../Css/blog_typesetting.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="icon" type="image/x-icon" href="../Images/argentum.png">
+</head>
+</head>
+<body>
+<div id="preamble" class="status">
+<!-- Preamble -->
+<!-- The header -->
+<div class="header">
+
+  <!-- The site name -->
+  <div class="site-name">
+    <a href="/">Amery Gration</a>
+  </div>
+  
+  <!-- The hamburger -->
+  <div class="hamburger">
+
+    <div id="myLinks" class="menu">
+	  <a href="/">About</a>
+	  <a href="/research.html">Research</a>
+	  <a href="/teaching.html">Teaching</a>
+	  <a href="/blog.html">Blog</a>
+    </div>
+
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+  </div>
+  
+  <div class="navbar">
+    <a href="/">About</a>
+    <a href="/research.html">Research</a>
+    <a href="/teaching.html">Teaching</a>
+    <a href="/blog.html">Blog</a>
+  </div>
+
+</div>
+
+<!-- The hamburger menu  -->
+<script>
+  function myFunction() {
+      var x = document.getElementById("myLinks");
+      if (x.style.display === "block") {
+	  x.style.display = "none";
+      } else {
+	  x.style.display = "block";
+      }
+  }
+</script>
+</div>
+<div id="content" class="content">
+
+<div id="outline-container-org0e842ee" class="outline-2">
+<h2 id="org0e842ee"><a href="citation_handling_in_emacs.html">Citation handling in Emacs</a></h2>
+<div class="outline-text-2" id="text-org0e842ee">
+<div class="published" id="orgafc750e">
+<p>
+Published on Wednesday  5 April 2023 at 12:00 BST
+</p>
+
+</div>
+<p>
+Until recently Emacs's Org mode had no native support for citation handling, which was done by third-party packages such as Org Ref.
+But as of Org version 9.5, <a href="https://orgmode.org/worg/org-release-notes.html">released</a> in October 2021, native citation handling has been provided by the built-in library Org Cite.
+Org Cite is intentionally basic, providing no more than core citation-handling functionality.
+On its own it has nothing like the capabilities of Org Ref.
+But it can be extended (this is Emacs, after all) with the Citar package.
+In turn, further packages can be used to enhance the combined functionality and appearance of Org Cite and Citar.
+Together these provide a near-complete citation-handling framework for Org.
+</p>
+
+<div class="morelink" id="org102cc65">
+<p>
+<a href="citation_handling_in_emacs.html">Read More</a>
+</p>
+
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div class="footer">
+  <hr><br><br>
+  Made with Emacs 28.1 (Org mode 9.6.2).
+  Last updated on Thursday 6 April 2023 <br>
+  Copyright © 2023 Amery Gration<br><br>
+  <a href="/contact.html"
+    <i class="fa fa-info-circle" style="font-size:36px;color:gray"></i>
+  </a>
+  <a href="https://twitter.com/amerygration"
+    <i class="fa fa-twitter" style="font-size:36px;color:gray"></i>
+  </a>
+  <a href="https://github.com/AmeryGration"
+    <i class="fa fa-github" style="font-size:36px;color:gray"></i>
+  </a><br><br>
+</div>
+</div>
+</body>
+</html>

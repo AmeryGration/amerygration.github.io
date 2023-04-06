@@ -1,0 +1,225 @@
+@font-face {
+    font-family: "Myriad Pro";
+    src: url("/Fonts/MyriadPro-Regular.otf");    
+}
+
+:root {
+    font-family: "Myriad Pro", "Nimbus Sans", "Arial";
+    --header-height: 100px;
+    --header-max-width: 1000px;
+    --header-title-font-size: 30px;
+    --header-navbar-font-size: 18px;
+    --icon-size: 30px;
+    --line-height: 50px;
+    --padding-horizontal: 25px;
+    --padding-vertical: 25px;
+    --background: whitesmoke;
+    --color: #333333;
+    --hover-color: gray;
+}
+
+* {
+    /* margin: 0; */
+    background: var(--background);
+    color: var(--color);
+    /* padding: 0;
+    /* box-sizing: border-box; */
+}
+
+.header {
+    /* overflow: hidden; */
+    position: relative;
+
+    max-width: var(--header-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--padding-horizontal);
+    padding-right: var(--padding-horizontal);
+    /* height: 100px; */
+    background: var(--background);
+}
+
+.header a {
+    color: var(--color);
+    text-decoration: none;
+}
+
+.site-name {
+    display: inline-block;
+    font-size: var(--header-title-font-size);
+    line-height: var(--header-height);
+}
+
+@media (max-width: 600px) {
+    .navbar {
+	display: none;
+    }
+
+    .hamburger #myLinks {
+	display: none;
+    }
+ 
+    .hamburger a.icon {
+	font-size: var(--icon-size);
+	position: absolute;
+	top: calc(0.5*var(--header-height) - 0.6*var(--icon-size));
+	right: 0px;
+	padding-right: var(--padding-horizontal);
+    }
+
+
+    .menu {
+	padding-bottom: var(--padding-horizontal);
+    }
+    
+    .menu a {
+	text-decoration: font;
+	none-size: var(--header-navbar-font-size);
+	display: block;
+	line-height: 50px;
+    }
+
+    .menu a:hover {
+	color: var(--hover-color);
+    }
+
+}
+
+@media (min-width: 600px) {
+    .menu a {
+	display: none;
+    }
+    
+    .hamburger {
+	display: none;
+    }
+
+    .hamburger #myLinks {
+	display: none;
+    }
+
+    .navbar {
+	float: right;
+	width: 300px;
+	display: flex;
+	justify-content: space-between;
+	position: relative;
+	top: calc(0.5*var(--header-height) - 0.6*var(--icon-size));
+	right: 0px;
+
+    }
+
+    .navbar a {
+	text-decoration: none;
+	display: inline-block;
+    }
+
+    .navbar a:hover {
+	color: var(--hover-color);
+    }
+
+
+}
+
+/* Banner image */
+.banner_container {
+    max-width: var(--header-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--padding-horizontal);
+    padding-right: var(--padding-horizontal);
+}
+
+.banner_container img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Article */
+.content {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 600px;
+    padding-top: var(--padding-vertical);
+    padding-bottom: var(--padding-vertical);
+    padding-left: var(--padding-horizontal);
+    padding-right: var(--padding-horizontal);
+}
+
+/* Footer */
+hr {
+    border: none;
+    height: 1px;
+    color: var(--color);
+    background-color: var(--color);
+}
+
+.footer {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    /* padding-top: var(--padding-vertical); */
+    padding-bottom: var(--padding-vertical);
+    padding-left: var(--padding-horizontal);
+    padding-right: var(--padding-horizontal);
+    font-size: 12px;
+    text-align: center;
+}
+
+.fa {
+    text-decoration: none;
+}
+
+.src {
+    border: 1px solid var(--color);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: var(--padding-horizontal);
+    padding-right: var(--padding-horizontal);
+    overflow: scroll;
+}
+
+table {
+    /* width: 100%; */
+    text-align: left;
+    border-top: 1px solid var(--color);
+    border-top-width: 2px;
+    border-collapse: collapse;
+    margin: 0 0 1em 0;
+    caption-side: bottom;
+    margin-left:auto; 
+    margin-right:auto;
+    font-size: 14px;
+}
+
+caption, td, th {
+    padding: 0.3em;
+}
+
+caption {
+    padding-top: 1em;
+}
+
+tbody {
+    border-top: 1px solid var(--color);
+    border-bottom: 1px solid var(--color);
+    border-bottom-width: 2px;
+}
+
+tbody th, tfoot th {
+    border: 0;
+}
+
+th.name {
+    width: 25%;
+}
+
+th.location {
+    width: 20%;
+}
+
+tfoot {
+    text-align: center;
+    color: #555;
+    font-size: 0.8em;
+}
