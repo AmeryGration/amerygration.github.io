@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-04-06 Thu 13:53 -->
+<!-- 2023-04-07 Fri 10:29 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Citation handling in Emacs</title>
 <meta name="author" content="Amery Gration" />
 <meta name="generator" content="Org Mode" />
-<head>
-  <meta charset="UTF-8" />
-  <title>Amery Gration</title>
-  <link rel="stylesheet" href="../Css/style.css" />
-  <link rel="stylesheet" href="../Css/blog_typesetting.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="icon" type="image/x-icon" href="../Images/argentum.png">
-</head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="../Css/style.css" />
+<link rel="stylesheet" href="../Css/blog_typesetting.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="icon" type="image/x-icon" href="../Images/argentum.png">
+
+<!-- Google tag (gtag.js). See https://analytics.google.com/analytics/web/#/a181402249p250590135/admin/streams/table/ -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F9PBCHZCLR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-F9PBCHZCLR');
+</script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -163,7 +169,7 @@ The citation syntax is as follows, where the inner square brackets indicate opti
 <p>
 The <code>style</code> and <code>variant</code> elements specify the formatting of the exported citations when exporting to author-date styles.
 They are redundant when exporting to numerical styles.
-<i><i>The Month in Org</i></i> provides a description of their allowed values, which I reproduce in Table <a href="#orgd527974">1</a>.
+<i><i>The Month in Org</i></i> provides a description of their allowed values, which I reproduce in Table <a href="#orgf30c085">1</a>.
 The <code>commonPrefix</code> element is an arbitrary string specifying the prefix to all references.
 The <code>prefix</code> element is an arbitrary string specifying the prefix to an individual reference.
 The <code>citationKey</code> element specifies the BibTex or CSL-JSON key (in this case, <code>broglie1924</code>).
@@ -171,7 +177,7 @@ The <code>suffix</code> element is an arbitrary string specifying the suffix to 
 Finally, the <code>commonSuffix</code> element is an arbitrary string specifying the suffix to all references.
 </p>
 
-<table id="orgd527974" align="center">
+<table id="orgf30c085" align="center">
 <caption class="t-above"><span class="table-number">Table 1:</span> Allowed values of the elements <code>style</code> and <code>variant</code> used to specify author-date citation styles. (Adapted from the table published in <a href="https://blog.tecosaur.com/tmio/2021-07-31-citations.html"><i>This month in Org</i></a>.) The variant styles are <code>bare</code> (<code>b</code>), without surrounding punctuation, <code>caps</code> (<code>c</code>), with forced initial capitalization, and <code>full</code> (<code>f</code>), without using the <i>et al.</i> shortening of the author list.</caption>
 
 <colgroup>
@@ -425,7 +431,7 @@ You do not appear to be able to search for references using Org Cite alone.
 To specify the style use a prefix argument with <code>cite-insert</code>, i.e. use the command <code>C-u M-x org-cite-insert</code> (<code>C-u C-c C-x @</code>).
 Then select the references as normal.
 After <code>RET</code>, you will be prompted to specify a citation style and variant.
-Either enter this directly (following the allowed values shown in Table <a href="#orgd527974">1</a>) or use <code>TAB</code> to be presented with a list.
+Either enter this directly (following the allowed values shown in Table <a href="#orgf30c085">1</a>) or use <code>TAB</code> to be presented with a list.
 Then use <code>RET</code> to enter the citation to the text.
 As far as I can tell, you cannot insert a prefix, suffix, or locator using <code>org-cite-insert</code>.
 </p>
@@ -572,13 +578,13 @@ Non-existent citations (due to, say, a typo or spelling mistake) will be highlig
 </div>
 </div>
 
-<div id="outline-container-org8f80631" class="outline-2">
-<h2 id="org8f80631">Extending Org Cite</h2>
-<div class="outline-text-2" id="text-org8f80631">
+<div id="outline-container-org78cd5fb" class="outline-2">
+<h2 id="org78cd5fb">Extending Org Cite</h2>
+<div class="outline-text-2" id="text-org78cd5fb">
 <p>
 Citation insertion and editing using Org Cite is basic.
 You cannot kill citations, delete them, reorder them, or change their styles once they have been inserted.
-Nor can you access files (PDF, web links, etc.) associated with them other than the bibliography file.
+Nor can you access files (PDF files, web links, etc.) associated with them other than the bibliography file.
 In fact, you cannot search your bibliography file when inserting a citation.
 This additional functionality is provided by the <a href="https://github.com/emacs-citar/citar">Citar</a> package.
 Citar may be used in conjuction with the Vertico, Orderless, Embark, and Marginalia packages to give fast and near-comprehensive citation handling.
@@ -586,9 +592,9 @@ These packages can all be installed using MELPA and GNU ELPA.
 </p>
 </div>
 
-<div id="outline-container-org7977395" class="outline-3">
-<h3 id="org7977395">Citar</h3>
-<div class="outline-text-3" id="text-org7977395">
+<div id="outline-container-orgf69c9d1" class="outline-3">
+<h3 id="orgf69c9d1">Citar</h3>
+<div class="outline-text-3" id="text-orgf69c9d1">
 <p>
 The Citar package (formerly called `Bibtex Actions') by Bruce D'Arcus provides much of the functionality that Org Cite lacks.
 It provides new processors for insertion, activation, and following, but leaves the export processors unchanged.
@@ -604,9 +610,9 @@ Install Citar (using <code>M-x package-install RET citar RET</code>) and set the
 </div>
 </div>
 
-<div id="outline-container-org32453e0" class="outline-4">
-<h4 id="org32453e0">Citation insertion and editing</h4>
-<div class="outline-text-4" id="text-org32453e0">
+<div id="outline-container-org144d9a8" class="outline-4">
+<h4 id="org144d9a8">Citation insertion and editing</h4>
+<div class="outline-text-4" id="text-org144d9a8">
 <p>
 You may insert a citation using the command <code>M-x citar-insert-citation</code> (<code>C-c C-x @</code>).
 This replaces the command <code>M-x org-cite-insert</code>, and has the same keybinding.
@@ -630,16 +636,16 @@ However, as far as I can tell there is no way at all to insert or change a commo
 </div>
 </div>
 
-<div id="outline-container-org309a1e5" class="outline-4">
-<h4 id="org309a1e5">Citation following</h4>
-<div class="outline-text-4" id="text-org309a1e5">
+<div id="outline-container-org4ca7d5c" class="outline-4">
+<h4 id="org4ca7d5c">Citation following</h4>
+<div class="outline-text-4" id="text-org4ca7d5c">
 <p>
 You may associate files with a reference source entry using BibTex, by setting the fields <code>url</code>, <code>doi</code>, and <code>file</code> (this contating a file path, typically to a PDF of the resource).
 You may associate notes with a reference by specifying the directory in which they are kept.
-To do so use <code>M-x set-variable RET citar-notes-paths RET ("Path/To/Notes") RET</code> or add the following to your init file.
+To do so use <code>M-x set-variable RET citar-notes-paths RET ("Path/To/NotesDir") RET</code> or add the following to your init file.
 </p>
 <div class="org-src-container">
-<pre class="src src-elisp">(setq citar-notes-paths '("Path/To/Notes"))
+<pre class="src src-elisp">(setq citar-notes-paths '("Path/To/NotesDir"))
 </pre>
 </div>
 <p>
@@ -650,9 +656,9 @@ If there is no notes file associated with a reference, you will be given the opt
 </div>
 </div>
 
-<div id="outline-container-orgdcf0e0e" class="outline-4">
-<h4 id="orgdcf0e0e">Citation activation</h4>
-<div class="outline-text-4" id="text-orgdcf0e0e">
+<div id="outline-container-org209c72d" class="outline-4">
+<h4 id="org209c72d">Citation activation</h4>
+<div class="outline-text-4" id="text-org209c72d">
 <p>
 Citar inherits the activation functionality of Org Cite.
 </p>
@@ -660,18 +666,18 @@ Citar inherits the activation functionality of Org Cite.
 </div>
 </div>
 
-<div id="outline-container-orgc5b1af5" class="outline-3">
-<h3 id="orgc5b1af5">Searching references</h3>
-<div class="outline-text-3" id="text-orgc5b1af5">
+<div id="outline-container-org2728a54" class="outline-3">
+<h3 id="org2728a54">Searching references</h3>
+<div class="outline-text-3" id="text-org2728a54">
 <p>
 Even with Citar it is somewhat difficult to interact with a bibliography and the files associated with its entries.
 To help with this the packages Embark, Vertico, Orderless, and Marginalia are very useful.
 </p>
 </div>
 
-<div id="outline-container-org1f4eeaa" class="outline-4">
-<h4 id="org1f4eeaa">Vertico</h4>
-<div class="outline-text-4" id="text-org1f4eeaa">
+<div id="outline-container-org02eb489" class="outline-4">
+<h4 id="org02eb489">Vertico</h4>
+<div class="outline-text-4" id="text-org02eb489">
 <p>
 The <a href="https://github.com/minad/vertico">Vertico</a> package by Daniel Mendler is a vertical completion user interface.
 Install Vertico (using <code>M-x package-install RET vertico RET</code>) and ensure <code>vertico-mode</code> is enabled by adding the following to your init file.
@@ -688,9 +694,9 @@ As before, you may insert single or multiple references.
 </div>
 </div>
 
-<div id="outline-container-org580fd66" class="outline-4">
-<h4 id="org580fd66">Orderless</h4>
-<div class="outline-text-4" id="text-org580fd66">
+<div id="outline-container-org5408260" class="outline-4">
+<h4 id="org5408260">Orderless</h4>
+<div class="outline-text-4" id="text-org5408260">
 <p>
 The <a href="https://github.com/oantolin/orderless">Orderless</a> package by Omar Antolin Camarena is a completion style that allows searching with any number of space-seperated terms entered in any order.
 Install Orderless (using <code>M-x package-install RET orderless RET</code>) and set the appropriate variables by adding the following to your init file.
@@ -707,9 +713,9 @@ When entering or replacing a citation with <code>citar-insert-citation</code> (<
 </div>
 </div>
 
-<div id="outline-container-orgd8d0668" class="outline-4">
-<h4 id="orgd8d0668">Embark</h4>
-<div class="outline-text-4" id="text-orgd8d0668">
+<div id="outline-container-org2e6d613" class="outline-4">
+<h4 id="org2e6d613">Embark</h4>
+<div class="outline-text-4" id="text-org2e6d613">
 <p>
 The <a href="https://github.com/oantolin/embark/">Embark</a> package, by Omar Antolin Camarena, provides a contextual menu for a target (in this case, a citation) in the same way right-clicking with a mouse does in software inferior to Emacs.
 It improves the way in which citations are followed in Citar.
@@ -728,9 +734,9 @@ Now <code>M-x org-open-at-point</code> (<code>C-c C-o</code>) will open a new wi
 </div>
 </div>
 
-<div id="outline-container-orgd136ff8" class="outline-4">
-<h4 id="orgd136ff8">Marginalia</h4>
-<div class="outline-text-4" id="text-orgd136ff8">
+<div id="outline-container-org3abb79e" class="outline-4">
+<h4 id="org3abb79e">Marginalia</h4>
+<div class="outline-text-4" id="text-org3abb79e">
 <p>
 The <a href="https://github.com/minad/marginalia">Marginalia</a> package, by Daniel Mendler, adds annotations to the minibuffer's completion options.
 Again, install Embark and Citar Embark (using <code>M-x package-install RET marginalia RET</code>) and ensure <code>marginalia-mode</code> is enabled by adding the following to your init file.
@@ -747,9 +753,9 @@ When typing a Citar command, e.g. the partial command <code>M-x citar-</code>, m
 </div>
 </div>
 
-<div id="outline-container-org4d3dae3" class="outline-2">
-<h2 id="org4d3dae3">The complete specification</h2>
-<div class="outline-text-2" id="text-org4d3dae3">
+<div id="outline-container-org44b23c2" class="outline-2">
+<h2 id="org44b23c2">The complete specification</h2>
+<div class="outline-text-2" id="text-org44b23c2">
 <p>
 Citation handling, according to the specification I have given can be implemented with following Elisp code, which is as it appears in my init file.
 The packages Helm, Ivy, Helm Bibtex, Ivy Bibtex, and Org Ref are, as the doctors say, contraindicated for this code.
@@ -803,7 +809,7 @@ The packages Helm, Ivy, Helm Bibtex, Ivy Bibtex, and Org Ref are, as the doctors
         org-cite-follow-processor 'citar
         org-cite-activate-processor 'citar
         citar-bibliography org-cite-global-bibliography
-        citar-notes-paths '("~/Path/To/Notes")))
+        citar-notes-paths '("~/Path/To/NotesDir")))
 
 (use-package citar-embark
   :after citar embark
@@ -821,7 +827,7 @@ The packages Helm, Ivy, Helm Bibtex, Ivy Bibtex, and Org Ref are, as the doctors
 <div class="footer">
   <hr><br><br>
   Made with Emacs 28.1 (Org mode 9.6.2).
-  Last updated on Thursday 6 April 2023 <br>
+  Last updated on Friday 7 April 2023 <br>
   Copyright © 2023 Amery Gration<br><br>
   <a href="/contact.html"
     <i class="fa fa-info-circle" style="font-size:36px;color:gray"></i>
