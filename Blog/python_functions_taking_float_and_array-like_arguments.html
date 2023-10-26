@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-10-26 Thu 15:40 -->
+<!-- 2023-10-26 Thu 15:41 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Python functions taking float and array-like arguments</title>
@@ -112,15 +112,14 @@ array(1.)
 </div>
 
 <p>
-So what should I do? A home-made function that is just some sequence of Numpy functions will always behave in the same way. Let's imagine that I define such a function, <code>func</code>. It will return the appropriate Numpy type because it <i>is</i> a Numpy function, albeit a composite +begin<sub>src</sub>.
+So what should I do? A home-made function that is just some sequence of Numpy functions will always behave in the same way. Let's imagine that I define such a function, <code>func</code>. It will return the appropriate Numpy type because it <i>is</i> a Numpy function, albeit a composite one.
 </p>
 
-<p>
-#one python
-def func(x):
-    return some<sub>function</sub><sub>of</sub>(x)
-#+end<sub>src</sub>
-</p>
+<div class="org-src-container">
+<pre class="src src-python">def func(x):
+    return some_function_of(x)
+</pre>
+</div>
 
 <p>
 However, there is a good case to be made for a function always returning the same type of object, in this case a <code>numpy.ndarray</code>. To do so I must stop floats and 0d arrays from being returned as <code>numpy.float64</code> objects. The trick is to cast both of these types as 1d <code>numpy.ndarray</code> objects and then squeeze them to become 0d <code>numpy.ndarray</code> objects. This code does the trick.
