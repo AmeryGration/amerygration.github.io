@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-10-26 Thu 12:54 -->
+<!-- 2023-10-26 Thu 12:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Python functions taking float and array-like arguments</title>
@@ -77,7 +77,7 @@
 <h1 class="title">Python functions taking float and array-like arguments</h1>
 <p class="subtitle" role="doc-subtitle">Published Thursday 26 October 2023 at 12:30 BST</p>
 </header><p>
-I often find myself wanting to write a Python function that accepts scalars and array-like objects for each argument. In these cases I have to make a decision about that function's return type. Typically the function performs Numpy operations on the arguments passed to it. But the return type of Numpy functions often surprises me. If a scalar or 0d array-like object is passed to such a Numpy function then it returns a <code>numpy.float64</code> object. Only otherwise does it return a <code>numpy.object</code> ndarray. For example, using <code>numpy.sin</code> we find the following.
+I often find myself wanting to write a Python function that accepts scalars and array-like objects for each argument. In these cases I have to make a decision about that function's return type. Typically the function performs Numpy operations on the arguments passed to it. But the return type of Numpy functions often surprises me. If a scalar or 0d array-like object is passed to such a Numpy function then it returns a <code>numpy.float64</code> object. Only otherwise does it return a <code>numpy.object</code> ndarray. For example, using <code>numpy.sin</code> I find the following.
 </p>
 
 <div class="org-src-container">
@@ -214,7 +214,7 @@ ValueError: message.
 </div>
 
 <p>
-But if I want my function to be consistent with Numpy then casting scalars to arrays (i.e. promoting the dimension of an object) is exactly what I want to avoid doing. Having promoted the dimensions <code>x</code> and <code>y</code> I am stuck with Numpy arrays. I might try to extract the elements of <code>x</code> and <code>y</code> using <code>x.item()</code> and <code>y.item()</code> but this gives me Python <code>float</code> objects, not Numpy <code>numpy.float64</code> objects. The trick this time is to treat scalars and array-like objects separately and to coerce the array-like objects into being Numpy arrays instead of coercing the floats as we did before.
+But if I want my function to be consistent with Numpy then casting scalars to arrays (i.e. promoting the dimension of an object) is exactly what I want to avoid doing. Having promoted the dimensions <code>x</code> and <code>y</code> I am stuck with Numpy arrays. I might try to extract the elements of <code>x</code> and <code>y</code> using <code>x.item()</code> and <code>y.item()</code> but this gives me Python <code>float</code> objects, not Numpy <code>numpy.float64</code> objects. The trick this time is to treat scalars and array-like objects separately and to coerce the array-like objects into being Numpy arrays instead of coercing the floats as I did before.
 </p>
 
 <div class="org-src-container">
