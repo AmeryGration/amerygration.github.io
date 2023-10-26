@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-10-26 Thu 12:29 -->
+<!-- 2023-10-26 Thu 12:33 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Python functions taking float and array-like arguments</title>
@@ -77,7 +77,7 @@
 <h1 class="title">Python functions taking float and array-like arguments</h1>
 <p class="subtitle" role="doc-subtitle">Published Thursday 26 October 2023 at 12:30 BST</p>
 </header><p>
-I often find myself wanting to write a Python function that accepts scalars and array-like objects for each argument. In these cases I have to make a decision about that function's return type. Typically the function performs Numpy operations on the arguments passed to it. But the return type of Numpy functions often surprises me. If a scalar or 0d array-like object is passed to such a Numpy function then it returns a `numpy.float64` object. Only otherwise does it return a `numpy.object` ndarray. For example, using `numpy.sin` we find the following.
+I often find myself wanting to write a Python function that accepts scalars and array-like objects for each argument. In these cases I have to make a decision about that function's return type. Typically the function performs Numpy operations on the arguments passed to it. But the return type of Numpy functions often surprises me. If a scalar or 0d array-like object is passed to such a Numpy function then it returns a <code>numpy.float64</code> object. Only otherwise does it return a <code>numpy.object</code> ndarray. For example, using <code>numpy.sin</code> we find the following.
 </p>
 
 <div class="org-src-container">
@@ -92,7 +92,7 @@ I often find myself wanting to write a Python function that accepts scalars and 
 </div>
 
 <p>
-Any operation on a `numpy.float64` object returns another `numpy.float64` object. More surprisingly, any operation on a 0d `numpy.ndarray` object also returns a `numpy.float64` object. Even multiplying by one does this. 
+Any operation on a <code>numpy.float64</code> object returns another <code>numpy.float64</code> object. More surprisingly, any operation on a 0d <code>numpy.ndarray</code> object also returns a <code>numpy.float64</code> object. Even multiplying by one does this. 
 </p>
 
 <div class="org-src-container">
@@ -112,7 +112,7 @@ array(1.)
 </div>
 
 <p>
-So what should I do? A home-made function that is just some sequence of Numpy functions will always behave in the same way. Let's imagine tha I define such a function, `func`.
+So what should I do? A home-made function that is just some sequence of Numpy functions will always behave in the same way. Let's imagine tha I define such a function, <code>func</code>.
 </p>
 
 <div class="org-src-container">
@@ -122,7 +122,7 @@ So what should I do? A home-made function that is just some sequence of Numpy fu
 </div>
 
 <p>
-However, there is a good case to be made for a function always returning the same type of object, in this case a `numpy.ndarray`. To do so we must stop floats and 0d arrays from being returned as `numpy.float64` objects. The trick is to cast both of these types as 1d `numpy.ndarray` objects and then squeeze them to become 0d `numpy.ndarray` objects. This code does the trick.
+However, there is a good case to be made for a function always returning the same type of object, in this case a <code>numpy.ndarray</code>. To do so we must stop floats and 0d arrays from being returned as <code>numpy.float64</code> objects. The trick is to cast both of these types as 1d <code>numpy.ndarray</code> objects and then squeeze them to become 0d <code>numpy.ndarray</code> objects. This code does the trick.
 </p>
 
 <div class="org-src-container">
@@ -143,7 +143,7 @@ However, there is a good case to be made for a function always returning the sam
 </div>
 
 <p>
-In this way, scalar and 0d array-like arguments become 0d Numpy arrays. Other arguments become Numpy arrays while preserving their dimension. Let's say that `some<sub>function</sub><sub>of</sub>(x)` is `np.log(x)`. The Numpy function itself works as follows.
+In this way, scalar and 0d array-like arguments become 0d Numpy arrays. Other arguments become Numpy arrays while preserving their dimension. Let's say that <code>some_function_of(x)</code> is <code>np.log(x)</code>. The Numpy function itself works as follows.
 </p>
 
 <div class="org-src-container">
@@ -163,7 +163,7 @@ array([1.])
 </div>
 
 <p>
-But `func` works differently.
+But <code>func</code> works differently.
 </p>
 
 <div class="org-src-container">
@@ -214,7 +214,7 @@ ValueError: message.
 </div>
 
 <p>
-But if I want my function to be consistent with Numpy then casting scalars to arrays (i.e. promoting the dimension of an object) is exactly what I want to avoid doing. Having promoted the dimensions `x` and `y` I am stuck with Numpy arrays. I might try to extract the elements of `x` and `y` using `x.item()` and `y.item()` but this gives me Python `float` objects, not Numpy `numpy.float64` objects. The trick this time is to treat scalars and array-like objects separately and to coerce the array-like objects into being Numpy arrays instead of coercing the floats as we did before.
+But if I want my function to be consistent with Numpy then casting scalars to arrays (i.e. promoting the dimension of an object) is exactly what I want to avoid doing. Having promoted the dimensions <code>x</code> and <code>y</code> I am stuck with Numpy arrays. I might try to extract the elements of <code>x</code> and <code>y</code> using <code>x.item()</code> and <code>y.item()</code> but this gives me Python <code>float</code> objects, not Numpy <code>numpy.float64</code> objects. The trick this time is to treat scalars and array-like objects separately and to coerce the array-like objects into being Numpy arrays instead of coercing the floats as we did before.
 </p>
 
 <div class="org-src-container">
