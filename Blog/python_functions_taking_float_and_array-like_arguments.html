@@ -4,14 +4,14 @@
 <!-- 2023-10-26 Thu 12:27 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Blog </title>
+<title>Python functions taking float and array-like arguments</title>
 <meta name="author" content="Amery Gration" />
 <meta name="generator" content="Org Mode" />
 <meta charset="UTF-8" />
-<link rel="stylesheet" href="Css/style.css" />
-<link rel="stylesheet" href="Css/typesetting.css" />
+<link rel="stylesheet" href="../Css/style.css" />
+<link rel="stylesheet" href="../Css/blog_typesetting.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="icon" type="image/x-icon" href="Images/argentum.png">
+<link rel="icon" type="image/x-icon" href="../Images/argentum.png">
 
 <!-- Google tag (gtag.js). See https://analytics.google.com/analytics/web/#/a181402249p250590135/admin/streams/table/ -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-F9PBCHZCLR"></script>
@@ -39,7 +39,7 @@
     <div id="myLinks" class="menu">
 	  <a href="/">About</a>
 	  <a href="/research.html">Research</a>
-	  <!-- <a href="/teaching.html">Teaching</a> -->    
+	  <!-- <a href="/teaching.html">Teaching</a> -->
 	  <a href="/blog.html">Blog</a>
 	  <a href="/contact.html">Contact</a>
     </div>
@@ -71,28 +71,12 @@
       }
   }
 </script>
-
-<div class="banner_container">
-  <a href="https://www.esa.int/Science_Exploration/Space_Science/Gaia/Gaia_creates_richest_star_map_of_our_Galaxy_and_beyond"><img src="Images/banner.jpg" alt="Gaia’s all-sky view of our Milky Way Galaxy and neighbouring galaxies, based on measurements of nearly 1.7 billion stars."></a>
-</div>
 </div>
 <div id="content" class="content">
 <header>
-<h1 class="title">Blog </h1>
+<h1 class="title">Python functions taking float and array-like arguments</h1>
+<p class="subtitle" role="doc-subtitle">Published Thursday 26 October 2023 at 13:00 BST</p>
 </header><p>
-An occassional series of posts on physics and computing.
-</p>
-
-<div id="outline-container-org2194dd5" class="outline-2">
-<h2 id="org2194dd5"><a href="Blog/python_functions_taking_float_and_array-like_arguments.html">Python functions taking float and array-like arguments</a></h2>
-<div class="outline-text-2" id="text-org2194dd5">
-<div class="published" id="org5e77b33">
-<p>
-Published on Thursday 26 October 2023 at 13:00 BST
-</p>
-
-</div>
-<p>
 I often find myself wanting to write a Python function that accepts scalars and array-like objects for each argument. In these cases I have to make a decision about that function's return type. Typically the function performs Numpy operations on the arguments passed to it. But the return type of Numpy functions often surprises me. If a scalar or 0d array-like object is passed to such a Numpy function then it returns a `numpy.float64` object. Only otherwise does it return a `numpy.object` ndarray. For example, using `numpy.sin` we find the following.
 </p>
 
@@ -270,68 +254,6 @@ Much better.
 <p>
 <i>The users of Stack Overflow helped me get my head straight on this by answering <a href="https://stackoverflow.com/questions/77359660/why-does-operating-on-a-0d-numpy-array-give-a-numpy-float">this question</a> of mine.</i>
 </p>
-</div>
-</div>
-
-<div id="outline-container-org6e25251" class="outline-2">
-<h2 id="org6e25251"><a href="Blog/backing_up_your_linux_machine.html">Backing up your Linux machine</a></h2>
-<div class="outline-text-2" id="text-org6e25251">
-<div class="published" id="org22ff9de">
-<p>
-Published on Saturday  8 April 2023 at 12:00 BST
-</p>
-
-</div>
-<p>
-<i>I wrote the following advice for members of the Astrophysics Research Group at the University of Surrey. I publish it here, unchanged, in the hope that it might be of use to others too.</i>
-</p>
-
-<p>
-The University does not provide automated backup of Linux machines, but instead leaves you to worry about this yourself.
-I suspect that most Linux users back up their data in a happy-go-lucky way, using GitLab and external storage, performing commits and file transfers only
-when they remember.
-But with some intermediate-level Bash tinkering you can arrange for full backups to be made automatically to a schedule.
-Setting this up should take half an hour or so.
-The first backup will take considerably longer but will not need your attention (my home drive is currently 180 Gb in size and took 15 hrs to first backup) while subsequent backups will take only minutes.
-</p>
-
-<div class="morelink" id="org2ac60a6">
-<p>
-<a href="Blog/backing_up_your_linux_machine.html">Read More</a>
-</p>
-
-</div>
-</div>
-</div>
-
-
-<div id="outline-container-orgcf26851" class="outline-2">
-<h2 id="orgcf26851"><a href="Blog/citation_handling_in_emacs.html">Citation handling in Emacs</a></h2>
-<div class="outline-text-2" id="text-orgcf26851">
-<div class="published" id="org4763b8a">
-<p>
-Published on Wednesday  5 April 2023 at 12:00 BST
-</p>
-
-</div>
-<p>
-Until recently Emacs's Org mode had no native support for citation handling, which was done by third-party packages such as Org Ref.
-But as of Org version 9.5, <a href="https://orgmode.org/worg/org-release-notes.html">released</a> in October 2021, native citation handling has been provided by the built-in library Org Cite.
-Org Cite is intentionally basic, providing no more than core citation-handling functionality.
-On its own it has nothing like the capabilities of Org Ref.
-But it can be extended (this is Emacs, after all) with the Citar package.
-In turn, further packages can be used to enhance the combined functionality and appearance of Org Cite and Citar.
-Together these provide a near-complete citation-handling framework for Org.
-</p>
-
-<div class="morelink" id="org6d28a04">
-<p>
-<a href="Blog/citation_handling_in_emacs.html">Read More</a>
-</p>
-
-</div>
-</div>
-</div>
 </div>
 <div id="postamble" class="status">
 <div class="footer">
