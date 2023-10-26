@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-10-26 Thu 12:28 -->
+<!-- 2023-10-26 Thu 12:29 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Python functions taking float and array-like arguments</title>
@@ -75,7 +75,7 @@
 <div id="content" class="content">
 <header>
 <h1 class="title">Python functions taking float and array-like arguments</h1>
-<p class="subtitle" role="doc-subtitle">Published Thursday 26 October 2023 at 13:00 BST</p>
+<p class="subtitle" role="doc-subtitle">Published Thursday 26 October 2023 at 12:30 BST</p>
 </header><p>
 I often find myself wanting to write a Python function that accepts scalars and array-like objects for each argument. In these cases I have to make a decision about that function's return type. Typically the function performs Numpy operations on the arguments passed to it. But the return type of Numpy functions often surprises me. If a scalar or 0d array-like object is passed to such a Numpy function then it returns a `numpy.float64` object. Only otherwise does it return a `numpy.object` ndarray. For example, using `numpy.sin` we find the following.
 </p>
