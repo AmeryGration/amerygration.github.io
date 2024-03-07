@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-10-26 Thu 15:41 -->
+<!-- 2024-03-07 Thu 18:20 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Backing up your Linux machine</title>
@@ -75,7 +75,7 @@
 <div id="content" class="content">
 <header>
 <h1 class="title">Backing up your Linux machine</h1>
-<p class="subtitle" role="doc-subtitle">Published Saturday  8 April 2023 at 12:00 BST</p>
+<p class="subtitle" role="doc-subtitle">Published Saturday  8 April 2023 at 12:00 WEST</p>
 </header><p>
 <i>I wrote the following advice for members of the Astrophysics Research Group at the University of Surrey. I publish it here, unchanged, in the hope that it might be of use to others too.</i>
 </p>
@@ -118,9 +118,9 @@ Importantly, it allows you to check that a backup is error free.
 With OneDrive, external storage, and Restic, you can build a backup system that satisfies all of your requirements.
 </p>
 
-<div id="outline-container-org9bc1b4b" class="outline-2">
-<h2 id="org9bc1b4b">Accessing OneDrive: Rclone</h2>
-<div class="outline-text-2" id="text-org9bc1b4b">
+<div id="outline-container-org60cf3a9" class="outline-2">
+<h2 id="org60cf3a9">Accessing OneDrive: Rclone</h2>
+<div class="outline-text-2" id="text-org60cf3a9">
 <p>
 You have access to <a href="https://it.surrey.ac.uk/file-storage">OneDrive file storage</a> with your University IT account.
 OneDrive is integrated with Windows and various consumer and business applications like Microsoft 365, from which Microsoft expect you to access it.
@@ -139,9 +139,9 @@ Then unmount OneDrive by returning to the first terminal and stopping Rclone wit
 </div>
 </div>
 
-<div id="outline-container-org67e3680" class="outline-2">
-<h2 id="org67e3680">Backing up to OneDrive with Restic</h2>
-<div class="outline-text-2" id="text-org67e3680">
+<div id="outline-container-org91bfd69" class="outline-2">
+<h2 id="org91bfd69">Backing up to OneDrive with Restic</h2>
+<div class="outline-text-2" id="text-org91bfd69">
 <p>
 <a href="https://restic.net/">Restic</a> performs full backups of a specified directory but avoids duplication by transmitting only new and modified files to the repository each time a backup is made.
 This makes all but the first backup very fast and the repository itself very light.
@@ -160,9 +160,9 @@ Let us go through the essentials.
 </p>
 </div>
 
-<div id="outline-container-orgcde7912" class="outline-3">
-<h3 id="orgcde7912">Initializing the backup repository</h3>
-<div class="outline-text-3" id="text-orgcde7912">
+<div id="outline-container-org0b2b127" class="outline-3">
+<h3 id="org0b2b127">Initializing the backup repository</h3>
+<div class="outline-text-3" id="text-org0b2b127">
 <p>
 First you must initialize the backup repository with the following command, which will prompt you to choose and confirm a password.
 (I assume that OneDrive is secure and therefore use a trivial password, namely <code>password</code>.)
@@ -174,9 +174,9 @@ First you must initialize the backup repository with the following command, whic
 </div>
 </div>
 
-<div id="outline-container-org2507ddb" class="outline-3">
-<h3 id="org2507ddb">Performing the first backup</h3>
-<div class="outline-text-3" id="text-org2507ddb">
+<div id="outline-container-org0038327" class="outline-3">
+<h3 id="org0038327">Performing the first backup</h3>
+<div class="outline-text-3" id="text-org0038327">
 <p>
 You are nearly ready to make the first backup.
 This will take considerable time, although subsequent backups will be much quicker.
@@ -203,9 +203,9 @@ With all these preliminaries out of the way, you can make your first backup by r
 </div>
 </div>
 
-<div id="outline-container-orgb80856c" class="outline-3">
-<h3 id="orgb80856c">Viewing the backup</h3>
-<div class="outline-text-3" id="text-orgb80856c">
+<div id="outline-container-orga6fbb17" class="outline-3">
+<h3 id="orga6fbb17">Viewing the backup</h3>
+<div class="outline-text-3" id="text-orga6fbb17">
 <p>
 Each backup of a directory is called a `snapshot'.
 Once your first backup is complete, you should have a single snapshot in your OneDrive repository.
@@ -221,9 +221,9 @@ This time you should see just one.
 </div>
 </div>
 
-<div id="outline-container-orge6692d1" class="outline-3">
-<h3 id="orge6692d1">Checking the backup</h3>
-<div class="outline-text-3" id="text-orge6692d1">
+<div id="outline-container-org7cf3568" class="outline-3">
+<h3 id="org7cf3568">Checking the backup</h3>
+<div class="outline-text-3" id="text-org7cf3568">
 <p>
 You should also check that the repository is error free, as follows.
 </p>
@@ -237,9 +237,9 @@ Again, you can issue this command at any time.
 </div>
 </div>
 
-<div id="outline-container-org2d5606a" class="outline-3">
-<h3 id="org2d5606a">Automating the backup</h3>
-<div class="outline-text-3" id="text-org2d5606a">
+<div id="outline-container-orgd705274" class="outline-3">
+<h3 id="orgd705274">Automating the backup</h3>
+<div class="outline-text-3" id="text-orgd705274">
 <p>
 You can schedule Restic to run automatically using the utility <a href="https://en.wikipedia.org/wiki/Cron">Cron</a>.
 To do this you create a script that is run by the Cron daemon at specified times.
@@ -442,9 +442,9 @@ Be sure that the scheduled job is being run as expected by checking that a snaps
 </div>
 </div>
 
-<div id="outline-container-orge86370b" class="outline-3">
-<h3 id="orge86370b">Recovering the backup</h3>
-<div class="outline-text-3" id="text-orge86370b">
+<div id="outline-container-orgda6e294" class="outline-3">
+<h3 id="orgda6e294">Recovering the backup</h3>
+<div class="outline-text-3" id="text-orgda6e294">
 <p>
 To recover data from your backup first create the directory to which this data will be restored, <code>/tmp/restored_work</code>.
 You can restore entire snapshots or specific files and directories from a single snapshot.
@@ -484,9 +484,9 @@ If this machine is, for example, irreparably damaged, you can simply restore dat
 </div>
 </div>
 
-<div id="outline-container-orgd6eb9c1" class="outline-2">
-<h2 id="orgd6eb9c1">Backing up to an external storage device with Restic</h2>
-<div class="outline-text-2" id="text-orgd6eb9c1">
+<div id="outline-container-orgd132085" class="outline-2">
+<h2 id="orgd132085">Backing up to an external storage device with Restic</h2>
+<div class="outline-text-2" id="text-orgd132085">
 <p>
 OneDrive is itself backed up, and this might make you think that a second storage medium is redundant.
 (For details on recovering data from OneDrive see Microsoft's advice <a href="https://support.microsoft.com/en-us/office/restore-a-previous-version-of-a-file-stored-in-onedrive-159cad6d-d76e-4981-88ef-de6e96c93893%E2%80%89">here</a>.)
@@ -532,9 +532,9 @@ Again, check that the scheduled job runs as expected.
 </div>
 </div>
 
-<div id="outline-container-orgecf5016" class="outline-2">
-<h2 id="orgecf5016">Final words</h2>
-<div class="outline-text-2" id="text-orgecf5016">
+<div id="outline-container-org3d50b7b" class="outline-2">
+<h2 id="org3d50b7b">Final words</h2>
+<div class="outline-text-2" id="text-org3d50b7b">
 <p>
 You are all done.
 If you have set things up so that Mail sends you alerts when a backup fails or a repository error is detected then you need never think about this again.
@@ -547,7 +547,7 @@ If not then it is wise to check your log files intermittently.
 <div class="footer">
   <hr><br><br>
   Made with Emacs 29.1 (Org mode 9.6.6).
-  Last updated on Thursday 26 October 2023 <br>
+  Last updated on Thursday 7 March 2024 <br>
   Copyright © 2023 Amery Gration<br><br>
   <!-- <a href="/contact.html" -->
   <!--   <i class="fa fa-info-circle" style="font-size:36px;color:gray"></i> -->
