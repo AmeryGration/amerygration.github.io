@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-12-22 Sun 22:10 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python functions taking float and array-like arguments</title>
+<meta name="author" content="CLWS00198-ag0082" />
+<meta name="generator" content="Org Mode" />
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="../Css/style.css" />
+<link rel="stylesheet" href="../Css/blog_typesetting.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="icon" type="image/x-icon" href="../Images/argentum.png">
+
+<!-- Google tag (gtag.js). See https://analytics.google.com/analytics/web/#/a181402249p250590135/admin/streams/table/ -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F9PBCHZCLR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-F9PBCHZCLR');
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<!-- Preamble -->
+<!-- The header -->
+<div class="header">
+
+  <!-- The site name -->
+  <div class="site-name">
+    <a href="/">Amery Gration</a>
+  </div>
+  
+  <!-- The hamburger -->
+  <div class="hamburger">
+
+    <div id="myLinks" class="menu">
+	  <a href="/">About</a>
+	  <a href="/research.html">Research</a>
+	  <!-- <a href="/teaching.html">Teaching</a> -->
+	  <a href="/blog.html">Blog</a>
+	  <a href="/contact.html">Contact</a>
+    </div>
+
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+  </div>
+  
+  <div class="navbar">
+    <a href="/">About</a>
+    <a href="/research.html">Research</a>
+    <!-- <a href="/teaching.html">Teaching</a> -->    
+    <a href="/blog.html">Blog</a>
+    <a href="/contact.html">Contact</a>
+  </div>
+
+</div>
+
+<!-- The hamburger menu  -->
+<script>
+  function myFunction() {
+      var x = document.getElementById("myLinks");
+      if (x.style.display === "block") {
+	  x.style.display = "none";
+      } else {
+	  x.style.display = "block";
+      }
+  }
+</script>
+</div>
+<div id="content" class="content">
+<header>
+<h1 class="title">Python functions taking float and array-like arguments</h1>
+<p class="subtitle" role="doc-subtitle">Published Thursday 26 October 2023 at 12:30 BST</p>
+</header><p>
+I often find myself wanting to write a Python function that accepts scalars and array-like objects for each argument. In these cases I have to make a decision about that function's return type. Typically the function performs Numpy operations on the arguments passed to it. But the return type of Numpy functions often surprises me. If a scalar or 0d array-like object is passed to such a Numpy function then it returns a <code>numpy.float64</code> object. Only otherwise does it return a <code>numpy.ndarray</code> object. For example, using <code>numpy.sin</code> I find the following.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">&gt;&gt;&gt; <span style="font-weight: bold;">import</span> numpy <span style="font-weight: bold;">as</span> np
+&gt;&gt;&gt; <span style="font-weight: bold; font-style: italic;">w</span> = np.sin(1); <span style="font-weight: bold; font-style: italic;">x</span> = np.sin(1.); <span style="font-weight: bold; font-style: italic;">y</span> = np.sin(np.array(1.)); <span style="font-weight: bold; font-style: italic;">z</span> = np.sin([1., 1.])
+&gt;&gt;&gt; <span style="font-weight: bold;">type</span>(w); <span style="font-weight: bold;">type</span>(x); <span style="font-weight: bold;">type</span>(y); <span style="font-weight: bold;">type</span>(z)
+&lt;<span style="font-weight: bold;">class</span> <span style="font-style: italic;">'numpy.float64'</span>&gt;
+&lt;<span style="font-weight: bold;">class</span> <span style="font-style: italic;">'numpy.float64'</span>&gt;
+&lt;<span style="font-weight: bold;">class</span> <span style="font-style: italic;">'numpy.float64'</span>&gt;
+&lt;<span style="font-weight: bold;">class</span> <span style="font-style: italic;">'numpy.ndarray'</span>&gt;
+</pre>
+</div>
+
+<p>
+Any operation on a <code>numpy.float64</code> object returns another <code>numpy.float64</code> object. More surprisingly, any operation on a 0d <code>numpy.ndarray</code> object also returns a <code>numpy.float64</code> object. Even multiplying by one does this. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">&gt;&gt;&gt; <span style="font-weight: bold; font-style: italic;">x</span> = np.array(1.)
+&gt;&gt;&gt; x; <span style="font-weight: bold;">type</span>(x); x.ndim; x.shape
+array(1.)
+&lt;<span style="font-weight: bold;">class</span> <span style="font-style: italic;">'numpy.ndarray'</span>&gt;
+0
+()
+&gt;&gt;&gt; <span style="font-weight: bold; font-style: italic;">x</span> = 1.*x
+&gt;&gt;&gt; x; <span style="font-weight: bold;">type</span>(x); x.ndim; x.shape
+1.0
+&lt;<span style="font-weight: bold;">class</span> <span style="font-style: italic;">'numpy.float64'</span>&gt;
+0
+()
+</pre>
+</div>
+
+<p>
+So what should I do? A home-made function that is just some sequence of Numpy functions will always behave in the same way. Let's imagine that I define such a function, <code>func</code>. It will return the appropriate Numpy type because it <i>is</i> a Numpy function, albeit a composite one.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">func</span>(x):
+    <span style="font-weight: bold;">return</span> some_function_of(x)
+</pre>
+</div>
+
+<p>
+However, there is a good case to be made for a function always returning the same type of object, in this case a <code>numpy.ndarray</code>. To do so I must stop floats and 0d arrays from being returned as <code>numpy.float64</code> objects. The trick is to cast both of these types as 1d <code>numpy.ndarray</code> objects and then squeeze them to become 0d <code>numpy.ndarray</code> objects. This code does the trick.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">func</span>(x):
+    <span style="font-weight: bold;">if</span> np.isscalar(x):
+        <span style="font-weight: bold; font-style: italic;">x</span> = np.atleast_1d(x)
+        <span style="font-weight: bold; font-style: italic;">scalar_flag</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">else</span>:
+        <span style="font-weight: bold; font-style: italic;">scalar_flag</span> = <span style="font-weight: bold; text-decoration: underline;">False</span>
+
+    <span style="font-weight: bold; font-style: italic;">res</span> = some_function_of(x)
+
+    <span style="font-weight: bold;">if</span> scalar_flag:
+        <span style="font-weight: bold;">return</span> res.squeeze()
+
+    <span style="font-weight: bold;">return</span> res
+</pre>
+</div>
+
+<p>
+In this way, scalar and 0d array-like arguments become 0d Numpy arrays. Other arguments become Numpy arrays while preserving their dimension. Let's say that <code>some_function_of(x)</code> is <code>numpy.log(x)</code>. The Numpy function itself works as follows.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">&gt;&gt;&gt; <span style="font-weight: bold; font-style: italic;">x</span> = np.log(1.)
+&gt;&gt;&gt; x; <span style="font-weight: bold;">type</span>(x); x.ndim; x.shape
+0.0
+&lt;<span style="font-weight: bold;">class</span> <span style="font-style: italic;">'numpy.float64'</span>&gt;
+0
+()
+&gt;&gt;&gt; <span style="font-weight: bold; font-style: italic;">x</span> = log([1.])
+&gt;&gt;&gt; x; <span style="font-weight: bold;">type</span>(x); x.ndim; x.shape
+array([1.])
+&lt;<span style="font-weight: bold;">class</span> <span style="font-style: italic;">'numpy.ndarray'</span>&gt;
+1
+(1,)
+</pre>
+</div>
+
+<p>
+But <code>func</code> works differently.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">&gt;&gt;&gt; <span style="font-weight: bold; font-style: italic;">x</span> = func(1.)
+&gt;&gt;&gt; x; <span style="font-weight: bold;">type</span>(x); x.ndim; x.shape
+array(0.)
+&lt;<span style="font-weight: bold;">class</span> <span style="font-style: italic;">'numpy.ndarray'</span>&gt;
+0
+()
+&gt;&gt;&gt; <span style="font-weight: bold; font-style: italic;">x</span> = func([1.])
+&gt;&gt;&gt; x; <span style="font-weight: bold;">type</span>(x); x.ndim; x.shape
+array([0.])
+&lt;<span style="font-weight: bold;">class</span> <span style="font-style: italic;">'numpy.ndarray'</span>&gt;
+1
+(1,)
+</pre>
+</div>
+
+<p>
+However, I prefer my functions to be consistent with Numpy's, so I need not worry about any of this. But this occasionally leaves me with another problem. Suppose that inside my function I wish to perform some check on the arguments. Let's say that my function takes two arguments and that I want to check that the first is compatible with second. I might coerce both arguments into being Numpy arrays and then compare their shapes.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">func</span>(x, y):
+    <span style="font-weight: bold; font-style: italic;">x</span> = np.asarray(x)
+    <span style="font-weight: bold; font-style: italic;">y</span> = np.asarray(y)
+    <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> x.shape == y.shape:
+        <span style="font-weight: bold;">raise</span> <span style="font-weight: bold; text-decoration: underline;">ValueError</span>(<span style="font-style: italic;">"message."</span>)
+
+    <span style="font-weight: bold;">return</span> x
+</pre>
+</div>
+
+<p>
+The function works as follows.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">&gt;&gt;&gt; func(1., 1.)
+array(1.)
+&gt;&gt;&gt; func([1.], [1.])
+array([1.])
+&gt;&gt;&gt; func(1., [1.])
+<span style="font-weight: bold; text-decoration: underline;">ValueError</span>: message.
+&gt;&gt;&gt; func([1.], [1., 1])
+<span style="font-weight: bold; text-decoration: underline;">ValueError</span>: message.
+</pre>
+</div>
+
+<p>
+But if I want my function to be consistent with Numpy then casting scalars to arrays (i.e. promoting the dimension of an object) is exactly what I want to avoid doing. Having promoted the dimensions <code>x</code> and <code>y</code> I am stuck with Numpy arrays. I might try to extract the elements of <code>x</code> and <code>y</code> using <code>x.item()</code> and <code>y.item()</code> but this gives me Python <code>float</code> objects, not Numpy <code>numpy.float64</code> objects. The trick this time is to treat scalars and array-like objects separately and to coerce the array-like objects into being Numpy arrays instead of coercing the floats as I did before.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">func</span>(x, y):
+    <span style="font-weight: bold;">if</span> np.isscalar(x) <span style="font-weight: bold;">and</span> np.isscalar(y):
+        <span style="font-weight: bold;">return</span> x
+    <span style="font-weight: bold;">else</span>:
+        <span style="font-weight: bold; font-style: italic;">x</span> = np.asarray(x)
+        <span style="font-weight: bold; font-style: italic;">y</span> = np.asarray(y)
+    <span style="font-weight: bold;">if</span> x.shape == y.shape:
+        <span style="font-weight: bold;">return</span> x
+    <span style="font-weight: bold;">else</span>:
+        <span style="font-weight: bold;">raise</span> <span style="font-weight: bold; text-decoration: underline;">ValueError</span>(<span style="font-style: italic;">"message."</span>)
+</pre>
+</div>
+
+<p>
+This behaves how I want it to.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">&gt;&gt;&gt; func(1., 1.)
+1.
+&gt;&gt;&gt; func([1.], [1.])
+array([1.])
+&gt;&gt;&gt; func(1., [1.])
+<span style="font-weight: bold; text-decoration: underline;">ValueError</span>: message.
+&gt;&gt;&gt; func([1.], [1., 1])
+<span style="font-weight: bold; text-decoration: underline;">ValueError</span>: message.
+</pre>
+</div>
+
+<p>
+Much better.
+</p>
+
+<p>
+<i>The users of Stack Overflow helped me get my head straight on this by answering <a href="https://stackoverflow.com/questions/77359660/why-does-operating-on-a-0d-numpy-array-give-a-numpy-float">this question</a> of mine.</i>
+</p>
+
+<p>
+<b>Update</b>
+</p>
+<p>
+There is an easier way to do this by accessing the elements of a Numpy array using an empty index. First cast the argument to a Numpy array and perform whatever operations you wish on it. Then, when it is time to return the result, <code>res</code>, instead return <code>res[()]</code>. The <a href="https://numpy.org/doc/stable/user/basics.indexing.html">Numpy documentation</a> states the following.
+</p>
+
+<blockquote>
+<p>
+An empty (tuple) index is a full scalar index into a zero-dimensional array. <code>x[()]</code> returns a scalar if <code>x</code> is zero-dimensional and a view otherwise.
+</p>
+</blockquote>
+
+<p>
+The function looks like this.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">func</span>(x):
+    <span style="font-weight: bold; font-style: italic;">x</span> = np.asarray(x)
+    <span style="font-weight: bold; font-style: italic;">res</span> = some_function_of(x)
+
+    <span style="font-weight: bold;">return</span> res[()]
+</pre>
+</div>
+
+<p>
+And works like this.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">&gt;&gt;&gt; <span style="font-weight: bold; font-style: italic;">x</span> = func(1.)
+&gt;&gt;&gt; x; <span style="font-weight: bold;">type</span>(x); x.ndim; x.shape
+0.8414709848078965
+&lt;<span style="font-weight: bold;">class</span> <span style="font-style: italic;">'numpy.float64'</span>&gt;
+0
+()
+&gt;&gt;&gt; <span style="font-weight: bold; font-style: italic;">x</span> = func([1.])
+&gt;&gt;&gt; x; <span style="font-weight: bold;">type</span>(x); x.ndim; x.shape
+array([0.84147098])
+&lt;<span style="font-weight: bold;">class</span> <span style="font-style: italic;">'numpy.ndarray'</span>&gt;
+1
+(1,)
+</pre>
+</div>
+
+<p>
+Super.
+</p>
+</div>
+<div id="postamble" class="status">
+<div class="footer">
+  <hr><br><br>
+  Made with Emacs 29.4 (Org mode 9.6.15).
+  Last updated on Sunday 22 December 2024 <br>
+  Copyright © 2023 Amery Gration<br><br>
+  <!-- <a href="/contact.html" -->
+  <!--   <i class="fa fa-info-circle" style="font-size:36px;color:gray"></i> -->
+  <!-- </a> -->
+  <a href="https://twitter.com/amerygration"
+    <i class="fa fa-twitter" style="font-size:36px;color:gray"></i>
+  </a>
+  <a href="https://github.com/AmeryGration"
+    <i class="fa fa-github" style="font-size:36px;color:gray"></i>
+  </a><br><br>
+</div>
+</div>
+</body>
+</html>
